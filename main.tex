@@ -1,0 +1,187 @@
+\documentclass[a4paper]{article}
+
+\usepackage{amsmath}
+\usepackage[sfdefault]{FiraSans} % Fira Sans font
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\title{ \textbf{Simpson's Rule Presentation}}
+\author{M Abdul Rehman 321}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\textsf{Simpson's rule is a numerical integration method that provides an accurate approximation of definite integrals. It is based on the concept of using quadratic polynomials i.e Parabola to approximate the curve of a function within each subinterval. In this presentation, we will explore the derivation and application of Simpson's rule. Before moving to Numerical Integration, we should be comfortable with interpolation and Numeric Differentiation.}
+
+\section{Interpolation}
+% Content about interpolation...
+Interpolation is a technique used to estimate the values of a function at points within a given range based on known data points. Let's consider an example of linear interpolation.
+
+
+\subsection{Linear Interpolation}
+% Content about linear interpolation...
+Suppose we have the following data points:
+\[
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $f(x)$ \\
+\hline
+0 & 1 \\
+2 & 3 \\
+4 & 5 \\
+\hline
+\end{tabular}
+\]
+We can connect these points with straight lines to approximate the function values at intermediate points.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\draw[->] (-1,0) -- (5,0) node[right] {$x$};
+\draw[->] (0,-1) -- (0,6) node[above] {$f(x)$};
+\foreach \x/\y in {0/1, 2/3, 4/5}
+    \filldraw (\x,\y) circle (1.5pt);
+\draw (0,1) -- (2,3) -- (4,5);
+\end{tikzpicture}
+\end{center}
+
+In the graph above, the data points are plotted, and the straight lines connect them to represent the linear interpolation.
+
+\subsection{Quadratic Interpolation}
+% Content about quadratic interpolation...
+Quadratic interpolation involves fitting a parabolic curve to three data points. Let's consider the following data points:
+\[
+\begin{tabular}{|c|c|}
+\hline
+$x$ & $f(x)$ \\
+\hline
+0 & 1 \\
+2 & 3 \\
+4 & 5 \\
+\hline
+\end{tabular}
+\]
+We can use these points to approximate the function values within the given range.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\draw[->] (-1,0) -- (5,0) node[right] {$x$};
+\draw[->] (0,-1) -- (0,6) node[above] {$f(x)$};
+\foreach \x/\y in {0/1, 2/3, 4/5}
+    \filldraw (\x,\y) circle (1.5pt);
+\draw (0,1) parabola bend (2,3) (4,5);
+\end{tikzpicture}
+\end{center}
+
+In the graph above, the data points are plotted, and a parabolic curve is fitted to represent the quadratic interpolation.
+
+\section{Simpson's Rule}
+% Content about Simpson's rule...
+
+\subsection{Derivation}
+% Content about the derivation of Simpson's rule...
+
+To derive Simpson's rule, we start by considering a parabolic polynomial $P(x) = Ax^2 + Bx + C$ that passes through three points: $(-h, y_0)$, $(0, y_1)$, and $(h, y_2)$. We want to find the coefficients $A$, $B$, and $C$ that satisfy these conditions. Let's substitute the values into the polynomial equation:
+
+\[
+\begin{aligned}
+y_0 &= A(-h)^2 + B(-h) + C \\
+y_1 &= A(0)^2 + B(0) + C \\
+y_2 &= A(h)^2 + B(h) + C \\
+\end{aligned}
+\]
+
+Simplifying the equations, we get:
+
+\[
+\begin{aligned}
+Ah^2 - Bh + C &= y_0 \\
+C &= y_1 \\
+Ah^2 + Bh + C &= y_2 \\
+\end{aligned}
+\]
+
+Solving this system of equations, we find:
+
+\[
+\begin{aligned}
+A &= \frac{1}{h^2}(y_0 - 2y_1 + y_2) \\
+B &= \frac{1}{2h}(y_2 - y_0) \\
+C &= y_1 \\
+\end{aligned}
+\]
+
+Now, let's integrate the polynomial $P(x)$ over the interval $[-h, h]$ to approximate the definite integral:
+
+\[
+\int_{-h}^{h} P(x) \, dx = \int_{-h}^{h} (Ax^2 + Bx + C) \, dx
+\]
+
+Integrating term by term, we get:
+
+\[
+\int_{-h}^{h} P(x) \, dx = \left[\frac{A}{3}x^3 + \frac{B}{2}x^2 + Cx \right]_{-h}^{h}
+\]
+
+Simplifying the expression, we obtain:
+
+\[
+\int_{-h}^{h} P(x) \, dx = \frac{h}{3}(y_0 + 4y_1 + y_2)
+\]
+
+This is the final expression for the approximation using Simpson's rule.
+
+
+
+
+
+
+% Content about the derivation of Simpson's rule...
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Formula}
+The formula for Simpson's rule is given by:
+\[
+\int_{a}^{b} f(x) \, dx \approx \frac{h}{3} \left[ yo + 4(y1+y3+y5+ ...) + 2(y2+y4+y6+ ...) + yn \right]
+\]
+where $h = \frac{b - a}{n}$ is the step size.
+Odd terms in the multiple of 4, and even in the multiple of 2.
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
